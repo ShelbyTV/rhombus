@@ -20,6 +20,18 @@ commands.enabled.get.forEach(function(cmd){
   });
 });
 
-app.listen(3010, 'localhost.shelby.tv', function(){
+var uri_map = {
+  production:'127.0.0.1',
+  development:'localhost.shelby.tv'
+};
+
+var uri = uri_map[process.env.NODE_ENV];
+
+if (!uri){
+  console.log('specify NODE_ENV');
+  process.exit();
+}
+
+app.listen(3010, uri, function(){
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 });
