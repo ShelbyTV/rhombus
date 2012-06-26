@@ -30,9 +30,8 @@
       this.$el.html($(_.template(this.template(), {title : this._get_title()})));
       $('body').append(this.$el);
       //var css = JSON.parse(localStorage._rhombus_state)[this.options.models[0].get('key')];
-      var self = this;
-      //self.$el.css(css);
-      self.plot();
+      //this.$el.css(css);
+      this.plot();
       this.$el.draggable();
       this._initResizePolling();
     },

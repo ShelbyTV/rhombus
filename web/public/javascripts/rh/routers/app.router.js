@@ -86,6 +86,17 @@
       window.videos_watched_model = new libs.models.set({key:'videos_watched', format:utils.active_web_format});
       alive.views['videos_watched'] = new libs.views.bar({models:[videos_watched_model], title:'Videos Watched (Hourly)'});
       window.videos_watched_model.scard();
+
+      setTimeout(function(){
+        //2 per row
+        Object.keys(alive.views).forEach(function(key, i){
+          var left = ((i%2)*610); //even numbs (and 0) will be zero odd will be 1
+          var top = ((Math.floor(i/2))*310); 
+          console.log(i, left, top);
+          var view = alive.views[key];
+          view.$el.css({top:top+'px', left:left});
+        });
+      }, 0);
     }
 
   });

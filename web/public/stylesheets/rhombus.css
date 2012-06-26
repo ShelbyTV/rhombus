@@ -8,10 +8,12 @@ body{
 .flot-view-container{
   cursor:pointer;
   position:absolute;
+  margin:20px;
+  float:left;
   resize:both;
   overflow:hidden;
-  height:200px;
-  width:400px;
+  height:300px;
+  width:600px;
 }
 
 .flot-view-header{
