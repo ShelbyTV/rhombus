@@ -1,0 +1,53 @@
+<head>
+  <link href='./stylesheets/rhombus.css' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Electrolize' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+</body>
+
+<!-- common -->
+<script src="http://www.google.com/jsapi"></script>
+<script>google.load("jquery",'1.7.1');</script>
+<script>google.load("jqueryui", "1");</script>
+<script type="text/javascript" src="./javascripts/common/underscore.js"></script>
+<script type="text/javascript" src="./javascripts/common/backbone.js"></script>
+<script type="text/javascript" src="./javascripts/common/flot/jquery.flot.js"></script>
+<script type="text/javascript" src="./javascripts/common/flot/jquery.flot.time.js"></script>
+<!-- init -->
+<script type="text/javascript" src="./javascripts/rh/init.js"></script>
+<!-- routers -->
+<script type="text/javascript" src="./javascripts/rh/routers/app.router.js"></script>
+<!-- utils -->
+<script type="text/javascript" src="./javascripts/rh/utils/client.js"></script>
+<!--<script type="text/javascript" src="./javascripts/rh/utils/state_saver.js"></script>-->
+<!-- fomats -->
+<script type="text/javascript" src="./javascripts/rh/utils/session_length.format.js"></script>
+<script type="text/javascript" src="./javascripts/rh/utils/hash_median.format.js"></script>
+<script type="text/javascript" src="./javascripts/rh/utils/active_web.format.js"></script>
+<script type="text/javascript" src="./javascripts/rh/utils/total_users.format.js"></script>
+<script type="text/javascript" src="./javascripts/rh/utils/flot_options/flot_bar_options.js"></script>
+<script type="text/javascript" src="./javascripts/rh/utils/flot_options/flot_line_options.js"></script>
+<!-- models -->
+<script type="text/javascript" src="./javascripts/rh/models/base.model.js"></script>
+<script type="text/javascript" src="./javascripts/rh/models/hash.model.js"></script>
+<script type="text/javascript" src="./javascripts/rh/models/set.model.js"></script>
+<script type="text/javascript" src="./javascripts/rh/models/int.model.js"></script>
+<!-- views -->
+<script type="text/javascript" src="./javascripts/rh/views/login.view.js"></script>
+<script type="text/javascript" src="./javascripts/rh/views/flot.view.js"></script>
+<script type="text/javascript" src="./javascripts/rh/views/bar.view.js"></script>
+<script type="text/javascript" src="./javascripts/rh/views/line.view.js"></script>
+
+<!-- templates -->
+<script id="flot-template" type="text/template"><%- partial('flot-template') %></script>
+<script id="login-template" type="text/template"><%- partial('login-template') %></script>
+
+<script type="text/javascript">
+
+  $(document).ready(function(){
+    window.alive.routers.app = new libs.routers.app();
+    Backbone.history.start({pushState:true});
+  });
+
+</script>

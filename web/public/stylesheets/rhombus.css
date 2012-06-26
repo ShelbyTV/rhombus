@@ -1,0 +1,67 @@
+body{ 
+  font-family: 'Electrolize', sans-serif;
+  background-color:#202020;
+  margin:50px 0px; padding:0px;
+  text-align:center;
+}
+
+.flot-view-container{
+  cursor:pointer;
+  position:absolute;
+  resize:both;
+  overflow:hidden;
+  height:200px;
+  width:400px;
+}
+
+.flot-view-header{
+  font-size:95%;
+  border-radius:5px;
+  font-style:bold;
+  color:white;
+  width:100%;
+  background-color:#272727;
+  padding:5px;
+}
+
+.flot-view{
+  font-family:'Arial';
+  height:87%;
+  width:97%;
+}
+
+.login-view-container{
+  width:300px;
+  margin:0px auto;
+  color:white;
+}
+
+.login-logo{
+  font-size:200%;
+}
+
+.login-input{
+  width:100%;
+  font-size:120%;
+  margin:5px;
+  background-color:black;
+  color:white;
+  border:2px solid black;
+}
+
+.login-button{
+  color:#404040;
+  cursor:pointer;
+  border-radius:5px;
+  margin:5px;
+  padding:5px;
+  background-color:#8BAB8D;
+}
+
+.login-wait-msg{
+  display:none;
+}
+
+.login-button:hover{
+  color:white;
+}
