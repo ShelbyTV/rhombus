@@ -6,6 +6,7 @@
 var express = require('express')
   , routes = require('./routes');
 
+/foo
 var app = module.exports = express.createServer();
 
 // Configuration
