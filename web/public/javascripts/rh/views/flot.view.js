@@ -9,7 +9,8 @@
     },
 
     template : function(){
-      return $('#flot-template').html();
+      var t = $('#flot-template').html();
+      return t;
     },
 
     initialize : function(){

@@ -10,7 +10,7 @@
     },
 
     _get_api_root : function(){
-      return this._env_api_root_map['development'];
+      return this._env_api_root_map['production'];
     }, 
 
     _request : function(cmd, data, cb, no_auth){

@@ -10,14 +10,13 @@
     },
 
     _clear : function(){
-      console.log('clearing');
+      console.log('clearing', Object.keys(alive.views));
       Object.keys(alive.views).forEach(function(key){
-        console.log(key);
+        alive.views[key].remove();
       });
     },
 
     auth : function(){
-      console.log(sessionStorage.rhombus);
       if (sessionStorage.rhombus_token){
         console.log('authed');
         return true;
@@ -35,7 +34,7 @@
       this._clear();
       alive.views.login = new libs.views.login();
       var html = alive.views.login.render().$el;
-      $('body').html(html);
+      $('body').append(html);
     },
 
     init_navigator : function(){
@@ -43,11 +42,10 @@
     },
 
     init_dashboard : function(){
-
       this.auth();
+      this._clear();
 
-      console.log('initting');
-      this.navigate('dashboard', {trigger:true});
+      console.log('initting dashboard');
 
       // total users (int)
       /*window.total_users_model = new libs.models.int({key:'total_users', format:utils.total_users_format});
@@ -55,24 +53,23 @@
       window.total_users_model._get();*/
 
       // total real users (int)
-      window.total_real_users_model = new libs.models.int({key:'total_real_users', format:utils.total_users_format});
-      //alive.views['total_real_users'] = new libs.views.bar({models:[total_real_users_model], title:'Total Real Users'});
-      //window.total_real_users_model._get();
+      /*window.total_real_users_model = new libs.models.int({key:'total_real_users', format:utils.total_users_format});
+      alive.views['total_real_users'] = new libs.views.bar({models:[total_real_users_model], title:'Total Real Users'});
+      window.total_real_users_model._get();*/
 
       // total faux users (int)
       window.total_faux_users_model = new libs.models.int({key:'total_faux_users', format:utils.total_users_format});
-      alive.views['total_faux_users'] = new libs.views.line({models:[total_faux_users_model, total_real_users_model], title:'Real Users vs Tracked Users'});
+      alive.views['total_faux_users'] = new libs.views.line({models:[total_faux_users_model], title:'Users we\'re tracking'});
       window.total_faux_users_model._get();
-      window.total_real_users_model._get();
       
       // session length (hash -> avg)
       window.session_length_model = new libs.models.hash({key:'session_length', format:utils.session_length_format});
-      alive.views['session_length'] = new libs.views.bar({models:[session_length_model], title:'Avg. Session Length (in seconds)'});
+      alive.views['session_length'] = new libs.views.bar({models:[session_length_model], title:'Avg. Session Length per Hour (in seconds)'});
       window.session_length_model.hgetall();
 
       // active users (set -> scard)
       window.active_web_model = new libs.models.set({key:'active_web', format:utils.active_web_format});
-      alive.views['active_web'] = new libs.views.bar({models:[active_web_model], title:'Active Users (Hourly)'});
+      alive.views['active_web'] = new libs.views.bar({models:[active_web_model], title:'# Active Users per Hour'});
       window.active_web_model.scard();
 
       // logins (set -> scard)
