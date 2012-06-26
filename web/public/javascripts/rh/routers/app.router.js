@@ -13,6 +13,7 @@
       console.log('clearing', Object.keys(alive.views));
       Object.keys(alive.views).forEach(function(key){
         alive.views[key].remove();
+        delete alive.views[key];
       });
     },
 
@@ -92,7 +93,7 @@
         Object.keys(alive.views).forEach(function(key, i){
           var left = ((i%2)*610); //even numbs (and 0) will be zero odd will be 1
           var top = ((Math.floor(i/2))*310); 
-          console.log(i, left, top);
+          console.log(i, left, top, key);
           var view = alive.views[key];
           view.$el.css({top:top+'px', left:left});
         });
