@@ -6,7 +6,6 @@
 
     events : {
       "click .login-button" : "_onLoginButtonClick"
-
     },
 
     initialize : function(){
@@ -17,8 +16,14 @@
       this.$('.login-wait-msg').slideToggle();
       var e = this.$('.email-input').val();
       var p = this.$('.pwd-input').val();
-      window.utils.client._request('login', {email:e,pwd:p}, function(){
-        console.log(arguments);
+      window.utils.client._request('login', {email:e,pwd:p}, function(res){
+        res = JSON.parse(res);
+        if (res.e || !res.data){
+          alive.routers.app.navigate('', {trigger:true});
+        } else {
+          sessionStorage.rhombus_token = res.data.token
+          alive.routers.app.navigate('dashboard', {trigger:true});
+        }
       }, true);
     },
 

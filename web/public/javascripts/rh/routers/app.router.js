@@ -9,8 +9,17 @@
       "navigator" : "init_navigator"
     },
 
+    _clear : function(){
+      console.log('clearing');
+      Object.keys(alive.views).forEach(function(key){
+        console.log(key);
+      });
+    },
+
     auth : function(){
-      if (sessionStorage.rhombus && sessionStorage.rhombus.token && sessionStorage.rhombus.valid){
+      console.log(sessionStorage.rhombus);
+      if (sessionStorage.rhombus_token){
+        console.log('authed');
         return true;
       }  else {
         this.navigate('login', {trigger:true});
@@ -23,6 +32,7 @@
     },
 
     init_login : function(){
+      this._clear();
       alive.views.login = new libs.views.login();
       var html = alive.views.login.render().$el;
       $('body').html(html);

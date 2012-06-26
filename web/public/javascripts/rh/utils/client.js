@@ -2,10 +2,7 @@
 
   window.utils.client = {
 
-    _auth_tokens : {
-      test:'Basic dGVzdDp0ZXN0',
-      shelby:'Basic c2hlbGJ5Ol9yaG9tYnVzX2d0'
-    },
+    _auth_token : null,
 
     _env_api_root_map : {
       "production" : 'http://api.rhombus.shelby.tv',
@@ -24,7 +21,7 @@
         data : data,
         beforeSend : function(xhr, settings){
           if (no_auth) return;
-          xhr.setRequestHeader('Authorization', self._auth_tokens['shelby']);
+          xhr.setRequestHeader('Authorization', sessionStorage.rhombus_token);
         },
         error : function(data){
           console.log("couldn't contact local rhombus API .. not a big deal", arguments);

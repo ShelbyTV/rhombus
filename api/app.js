@@ -8,6 +8,8 @@ var routes = require('./routes')
 
 var app = module.exports = get_app();
 
+app.get('/login', routes.login);
+
 commands.enabled.set.forEach(function(cmd){
   app.post('/'+cmd, auth, reqdata, keytrack, format, function(req, res){
     routes.set(req, res, cmd);
