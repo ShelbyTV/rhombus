@@ -17,6 +17,7 @@
     },
 
     auth : function(){
+      console.log('in auth');
       if (sessionStorage.rhombus_token){
         console.log('authed');
         return true;
@@ -26,11 +27,12 @@
     },
 
     init : function(url){
+      console.log('in init');
       this.auth() && this.navigate('dashboard');
-      this.navigate('dashboard');
     },
 
     init_login : function(){
+      console.log('in init_login');
       this._clear();
       alive.views.login = new libs.views.login();
       var html = alive.views.login.render().$el;
@@ -42,7 +44,10 @@
     },
 
     init_dashboard : function(){
-      this.auth();
+      console.log('in init dboard');
+
+      if (!this.auth()) return false;
+
       this._clear();
 
       console.log('initting dashboard');

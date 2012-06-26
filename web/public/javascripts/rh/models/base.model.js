@@ -21,7 +21,7 @@
       }, function(res){
         //try { 
           res = JSON.parse(res)
-          if (res.error || !res.data) return alert('something went wrong');
+          if (res.error || !res.data) return console.log(res.error);
           self.set({data:self.get('format')(res.data)});
         //} catch (e){
          // console.log(res);
