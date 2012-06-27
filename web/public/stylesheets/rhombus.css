@@ -67,3 +67,13 @@ body{
 .login-button:hover{
   color:white;
 }
+
+.numerical-view-container{
+  margin:0px auto;
+  width:300px;
+}
+
+.numerical-data-view{
+  margin:5px;
+  color:#8BAB8D;
+}

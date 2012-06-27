@@ -6,6 +6,7 @@
       "" : "init",
       "login" : "init_login",
       "dashboard" : "init_dashboard",
+      "actives" : "init_actives",
       "cohorts/:cohort" : "init_cohorts",
       "navigator" : "init_navigator"
     },
@@ -45,6 +46,26 @@
 
     },
 
+    init_actives : function(){
+
+      if (!this.auth()) return false;
+      this._clear();
+      console.log('initting actives');
+
+      window.dau_model = new libs.models.set({key:'active_web', format:utils.union_smembers_format});
+      window.wau_model = new libs.models.set({key:'active_web', format:utils.union_smembers_format});
+      window.mau_model = new libs.models.set({key:'active_web', format:utils.union_smembers_format});
+
+      alive.views['dau'] = new libs.views.numerical({ model:dau_model, title: ['Daily Active Users']});
+      alive.views['wau'] = new libs.views.numerical({ model:wau_model, title: ['Weekly Active Users']});
+      alive.views['mau'] = new libs.views.numerical({ model:mau_model, title: ['Monthly Active Users']});
+
+      window.dau_model.smembers({limit:24});
+      window.wau_model.smembers({limit:24*7});
+      window.mau_model.smembers({limit:24*7*4});
+
+    },
+
     init_cohorts : function(cohort){
 
       console.log('in init cohorts', cohort);
@@ -78,6 +99,16 @@
       window.frames_upvoted_model = new libs.models.set({key:'frames_upvoted'+ch, format:utils.active_web_format});
       alive.views['frames_upvoted'] = new libs.views.bar({models:[frames_upvoted_model], title:'Videos Upvoted'});
       window.frames_upvoted_model.scard();
+
+      // videos commented on (set -> scard)
+      window.frames_commented_model = new libs.models.set({key:'comments', format:utils.active_web_format});
+      alive.views['frames_commented'] = new libs.views.bar({models:[frames_commented_model], title:'Videos Commented On'});
+      window.frames_commented_model.scard();
+
+      // videos shared (set -> scard)
+      window.frames_shared_model = new libs.models.set({key:'shares', format:utils.active_web_format});
+      alive.views['frames_shared'] = new libs.views.bar({models:[frames_shared_model], title:'Videos Shared'});
+      window.frames_shared_model.scard();
 
       this._position_views();
 
@@ -117,6 +148,16 @@
       alive.views['frames_upvoted'] = new libs.views.bar({models:[frames_upvoted_model], title:'Videos Upvoted'});
       window.frames_upvoted_model.scard();
 
+      // videos commented on (set -> scard)
+      window.frames_commented_model = new libs.models.set({key:'comments', format:utils.active_web_format});
+      alive.views['frames_commented'] = new libs.views.bar({models:[frames_commented_model], title:'Videos Commented On'});
+      window.frames_commented_model.scard();
+
+      // videos shared (set -> scard)
+      window.frames_shared_model = new libs.models.set({key:'shares', format:utils.active_web_format});
+      alive.views['frames_shared'] = new libs.views.bar({models:[frames_shared_model], title:'Videos Shared'});
+      window.frames_shared_model.scard();
+
       // total real users (int)
       window.total_real_users_model = new libs.models.int({key:'total_real_users', format:utils.total_users_format});
       alive.views['total_real_users'] = new libs.views.line({models:[total_real_users_model], title:'Real Users'});
@@ -136,7 +177,7 @@
       /*window.web_logins_model = new libs.models.set({key:'web_logins', format:utils.active_web_format});
       window.web_longins_view = new libs.views.bar({models:[web_logins_model], title:'Web Logins'});
       window.web_logins_model.scard();*/
-      
+
       this._position_views();
       
     },
@@ -147,7 +188,6 @@
         Object.keys(alive.views).forEach(function(key, i){
           var left = ((i%2)*610); //even numbs (and 0) will be zero odd will be 1
           var top = ((Math.floor(i/2))*310); 
-          //console.log(i, left, top, key);
           var view = alive.views[key];
           view.$el.css({top:top+'px', left:left});
         });
