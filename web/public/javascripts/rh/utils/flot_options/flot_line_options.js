@@ -10,6 +10,7 @@
 
     },
     xaxis: {
+      ticks : 8,
       color:'white',
       mode : 'time'
     },
