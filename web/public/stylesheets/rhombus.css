@@ -6,11 +6,11 @@ body{
 }
 
 .flot-view-container{
-  cursor:pointer;
+  /*cursor:pointer;*/
   position:absolute;
   margin:20px;
-  float:left;
-  resize:both;
+  /*float:left;*/
+  /*resize:both;*/
   overflow:hidden;
   height:300px;
   width:600px;

@@ -32,8 +32,8 @@
       //var css = JSON.parse(localStorage._rhombus_state)[this.options.models[0].get('key')];
       //this.$el.css(css);
       this.plot();
-      this.$el.draggable();
-      this._initResizePolling();
+      /*this.$el.draggable();
+      this._initResizePolling();*/
     },
 
     _onMouseUp : function(){

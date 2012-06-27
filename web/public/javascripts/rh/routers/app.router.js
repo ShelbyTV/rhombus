@@ -53,40 +53,56 @@
 
       console.log('initting dashboard');
 
-      // total users (int)
-      /*window.total_users_model = new libs.models.int({key:'total_users', format:utils.total_users_format});
-      window.total_users_view = new libs.views.bar({models:[total_users_model], title:'Total Users'});
-      window.total_users_model._get();*/
-
-      // total real users (int)
-      /*window.total_real_users_model = new libs.models.int({key:'total_real_users', format:utils.total_users_format});
-      alive.views['total_real_users'] = new libs.views.bar({models:[total_real_users_model], title:'Total Real Users'});
-      window.total_real_users_model._get();*/
-
-      // total faux users (int)
-      window.total_faux_users_model = new libs.models.int({key:'total_faux_users', format:utils.total_users_format});
-      alive.views['total_faux_users'] = new libs.views.line({models:[total_faux_users_model], title:'Users we\'re tracking'});
-      window.total_faux_users_model._get();
-      
-      // session length (hash -> avg)
-      window.session_length_model = new libs.models.hash({key:'session_length', format:utils.session_length_format});
-      alive.views['session_length'] = new libs.views.bar({models:[session_length_model], title:'Avg. Session Length per Hour (in seconds)'});
-      window.session_length_model.hgetall();
-
       // active users (set -> scard)
       window.active_web_model = new libs.models.set({key:'active_web', format:utils.active_web_format});
-      alive.views['active_web'] = new libs.views.bar({models:[active_web_model], title:'# Active Users per Hour'});
+      alive.views['active_web'] = new libs.views.bar({models:[active_web_model], title:'Active Users'});
       window.active_web_model.scard();
+
+      // session length (hash -> avg)
+      window.session_length_model = new libs.models.hash({key:'session_length', format:utils.session_length_format});
+      alive.views['session_length'] = new libs.views.bar({models:[session_length_model], title:'Avg. Session Length (in seconds)'});
+      window.session_length_model.hgetall();
+
+      // videos watched (set scard)
+      window.videos_watched_model = new libs.models.set({key:'videos_watched', format:utils.active_web_format});
+      alive.views['videos_watched'] = new libs.views.bar({models:[videos_watched_model], title:'Videos Watched'});
+      window.videos_watched_model.scard();
+
+      // videos rolled (set -> scard)
+      window.frames_rolled_model = new libs.models.set({key:'frames_rolled', format:utils.active_web_format});
+      alive.views['frames_rolled'] = new libs.views.bar({models:[frames_rolled_model], title:'Videos Rolled'});
+      window.frames_rolled_model.scard();
+
+      // videos rolled (set -> scard)
+      window.frames_upvoted_model = new libs.models.set({key:'frames_upvoted', format:utils.active_web_format});
+      alive.views['frames_upvoted'] = new libs.views.bar({models:[frames_upvoted_model], title:'Videos Upvoted'});
+      window.frames_upvoted_model.scard();
+
+      // total real users (int)
+      window.total_real_users_model = new libs.models.int({key:'total_real_users', format:utils.total_users_format});
+      alive.views['total_real_users'] = new libs.views.line({models:[total_real_users_model], title:'Real Users'});
+      window.total_real_users_model._get();
+
+      // total users (int)
+      window.total_users_model = new libs.models.int({key:'total_users', format:utils.total_users_format});
+      alive.views['total_users'] = new libs.views.line({models:[total_users_model], title:'Total "Data" Users'});
+      window.total_users_model._get();
+
+      // total faux users (int)
+      /*window.total_faux_users_model = new libs.models.int({key:'total_faux_users', format:utils.total_users_format});
+      alive.views['total_faux_users'] = new libs.views.line({models:[total_faux_users_model], title:'Total "Faux" Users'});
+      window.total_faux_users_model._get();*/
+      
+      
+
+      
 
       // logins (set -> scard)
       /*window.web_logins_model = new libs.models.set({key:'web_logins', format:utils.active_web_format});
       window.web_longins_view = new libs.views.bar({models:[web_logins_model], title:'Web Logins'});
       window.web_logins_model.scard();*/
 
-      // videos watched (set scard)
-      window.videos_watched_model = new libs.models.set({key:'videos_watched', format:utils.active_web_format});
-      alive.views['videos_watched'] = new libs.views.bar({models:[videos_watched_model], title:'Videos Watched (Hourly)'});
-      window.videos_watched_model.scard();
+      
 
       setTimeout(function(){
         //2 per row
