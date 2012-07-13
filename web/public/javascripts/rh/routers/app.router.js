@@ -7,8 +7,7 @@
       "login" : "init_login",
       "dashboard" : "init_dashboard",
       "actives" : "init_actives",
-      "cohorts/:cohort" : "init_cohorts",
-      "navigator" : "init_navigator"
+      "cohorts/:cohort" : "init_cohorts"
     },
 
     _clear : function(){
@@ -17,6 +16,7 @@
         alive.views[key].remove();
         delete alive.views[key];
       });
+      window.navbar && window.navbar.remove();
     },
 
     auth : function(){
@@ -42,14 +42,19 @@
       $('body').append(html);
     },
 
-    init_navigator : function(){
-
+    init_navbar : function(opts){
+      console.log('initting navbar');
+      window.navbar = new libs.views.navbar(opts);
+      $('body').append(window.navbar.render().$el);
     },
 
     init_actives : function(){
 
       if (!this.auth()) return false;
       this._clear();
+
+      this.init_navbar({active_tab:'actives'});
+
       console.log('initting actives');
 
       window.dau_model = new libs.models.set({key:'active_web', format:utils.union_smembers_format});
@@ -72,6 +77,8 @@
       if (!this.auth()) return false;
       this._clear();
       console.log('initting cohorts');
+
+      this.init_navbar({active_tab:'dashboard', cohort:cohort});
 
       var ch = ':'+cohort;
 
@@ -122,6 +129,8 @@
       this._clear();
 
       console.log('initting dashboard');
+
+      this.init_navbar({active_tab:'dashboard'});
 
       // active users (set -> scard)
       window.active_web_model = new libs.models.set({key:'active_web', format:utils.active_web_format});
@@ -189,7 +198,7 @@
           var left = ((i%2)*610); //even numbs (and 0) will be zero odd will be 1
           var top = ((Math.floor(i/2))*310); 
           var view = alive.views[key];
-          view.$el.css({top:top+'px', left:left});
+          view.$el.css({top:(top+40)+'px', left:left});
         });
       }, 0);
     }

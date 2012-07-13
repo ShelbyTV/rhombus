@@ -70,10 +70,39 @@ body{
 
 .numerical-view-container{
   margin:0px auto;
-  width:300px;
+  width:200px;
 }
 
 .numerical-data-view{
   margin:5px;
   color:#8BAB8D;
+}
+
+.navbar-view-container{
+  padding:5px;
+  background-color:#272727;
+  color:white;
+  position:absolute;
+  top : 0px;
+  width:100%;
+}
+
+.navbar-item{
+  cursor:pointer;
+  margin:5px;
+  float:left;
+  color:#808080;
+}
+
+.navbar-item-cohort{
+  cursor:none;
+  color:white;
+}
+
+.navbar-active{
+  color:white;
+}
+
+.navbar-item:hover{
+  color:white;
 }

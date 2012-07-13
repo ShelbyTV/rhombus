@@ -1,0 +1,11 @@
+<div class="navbar-item navbar-item-cohort">
+ Cohort 
+  <select class="cohort-selector">
+    <option class="all-cohort-opt" value="all">all</option>
+    <option class="company-cohort-opt" value="company">company</option>
+    <option class="pre_onboarding-cohort-opt" value="pre_onboarding">pre-onboarding</option>
+  </select>
+</div>
+
+<div class="dboard navbar-item {{ active_tab==='dashboard' ? 'navbar-active' : '' }} ">Dashboard</div>
+<div class="active-users navbar-item {{ active_tab==='actives' ? 'navbar-active' : '' }}">Active Users</div>
