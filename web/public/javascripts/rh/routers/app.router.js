@@ -108,12 +108,12 @@
       window.frames_upvoted_model.scard();
 
       // videos commented on (set -> scard)
-      window.frames_commented_model = new libs.models.set({key:'comments', format:utils.active_web_format});
+      window.frames_commented_model = new libs.models.set({key:'comments'+ch, format:utils.active_web_format});
       alive.views['frames_commented'] = new libs.views.bar({models:[frames_commented_model], title:'Videos Commented On'});
       window.frames_commented_model.scard();
 
       // videos shared (set -> scard)
-      window.frames_shared_model = new libs.models.set({key:'shares', format:utils.active_web_format});
+      window.frames_shared_model = new libs.models.set({key:'shares'+ch, format:utils.active_web_format});
       alive.views['frames_shared'] = new libs.views.bar({models:[frames_shared_model], title:'Videos Shared'});
       window.frames_shared_model.scard();
 

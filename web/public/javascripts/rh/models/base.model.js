@@ -16,7 +16,7 @@
       var self = this;
       utils.client._request(opts.cmd, {
         skip : opts.skip || 0,
-        limit : opts.limit || 48,
+        limit : opts.limit || 168,
         args : [this.get('key')]
       }, function(res){
         //try { 
