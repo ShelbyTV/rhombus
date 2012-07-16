@@ -5,7 +5,7 @@
 
       bars:{
         show : true,
-        barWidth : 2000000, //absurdly high due to #ms in an hour
+        barWidth : 2000000*8, //absurdly high due to #ms in an hour
       }
 
     },

@@ -5,6 +5,7 @@
    * take the avg
    */
   var shift = utils.time_shift;
+  var floor_midnight = utils.floor_midnight;
 
   function get_map_numerical_avg(map){
     if (!map) return 0;
@@ -21,11 +22,23 @@
     return ms/1000/60;
   };
 
+  function condense(data, reduce_key){
+    var condensed = {};
+    Object.keys(data).forEach(function(key){
+      var _key = reduce_key(key);
+    });
+
+  };
+
   window.utils.session_length_format = function(data){
     var out = [];
+
+    //data = condense(data, floor_midnight);
+
     Object.keys(data).forEach(function(ts){
       out.push([shift(ts/1), ms_to_mins(get_map_numerical_avg(data[ts]))]);
     });
+
     return out;
   }
 
