@@ -1,6 +1,7 @@
 body{ 
   font-family: 'Electrolize', sans-serif;
   background-color:#202020;
+  /*background-color:black;*/
   margin:50px 0px; padding:0px;
   text-align:center;
 }
@@ -70,7 +71,7 @@ body{
 
 .numerical-view-container{
   margin:0px auto;
-  width:200px;
+  width:90%;
 }
 
 .numerical-data-view{
@@ -80,18 +81,19 @@ body{
 
 .navbar-view-container{
   padding:5px;
-  background-color:#272727;
   color:white;
   position:absolute;
   top : 0px;
   width:100%;
+  border-bottom:1px solid #707070;
 }
 
 .navbar-item{
   cursor:pointer;
   margin:5px;
   float:left;
-  color:#808080;
+  font-size:105%;
+  color:#909090;
 }
 
 .navbar-item-cohort{
@@ -104,5 +106,11 @@ body{
 }
 
 .navbar-item:hover{
+  color:white;
+}
+
+.cohort-selector{
+  background-color:black;
+  border:1px solid black;
   color:white;
 }

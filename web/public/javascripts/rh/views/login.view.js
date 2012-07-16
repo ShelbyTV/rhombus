@@ -22,7 +22,8 @@
           alive.routers.app.navigate('', {trigger:true});
         } else {
           sessionStorage.rhombus_token = res.data.token
-          alive.routers.app.navigate('dashboard', {trigger:true});
+          window.app_model.set({cohort:'all', active_tab:'dashboard'});
+          //alive.routers.app.navigate('dashboard', {trigger:true});
         }
       }, true);
     },

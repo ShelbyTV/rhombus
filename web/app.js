@@ -31,11 +31,10 @@ app.configure('production', function(){
 
 app.get('/', routes.index);
 app.get('/login', routes.index);
-app.get('/actives', routes.index);
-app.get('/cohorts/:cohort', routes.index);
+app.get('/cohorts/:cohort/dashboard', routes.index);
 app.get('/cohorts/:cohort/actives', routes.index);
-app.get('/dashboard', routes.index);
-app.get('/navigator', routes.index);
+app.get('/cohort_comparison', routes.index);
+app.get('/user_numbers', routes.index);
 
 app.listen(8000, function(){
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
