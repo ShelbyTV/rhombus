@@ -51,7 +51,8 @@ body{
   border:2px solid black;
 }
 
-.login-button{
+button.login-button{
+  width:100%;
   color:#404040;
   cursor:pointer;
   border-radius:5px;
