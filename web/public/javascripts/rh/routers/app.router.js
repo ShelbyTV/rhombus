@@ -7,7 +7,8 @@
       "login" : "init_login",
       "dashboard" : "init_dashboard",
       "actives" : "init_actives",
-      "cohorts/:cohort" : "init_cohorts"
+      "cohorts/:cohort" : "init_cohorts",
+      "cohorts/:cohort/actives" : "init_actives"
     },
 
     _clear : function(){
@@ -48,18 +49,20 @@
       $('body').append(window.navbar.render().$el);
     },
 
-    init_actives : function(){
+    init_actives : function(cohort){
 
       if (!this.auth()) return false;
       this._clear();
 
-      this.init_navbar({active_tab:'actives'});
+      this.init_navbar({active_tab:'actives', cohort:cohort});
 
       console.log('initting actives');
 
-      window.dau_model = new libs.models.set({key:'active_web', format:utils.union_smembers_format});
-      window.wau_model = new libs.models.set({key:'active_web', format:utils.union_smembers_format});
-      window.mau_model = new libs.models.set({key:'active_web', format:utils.union_smembers_format});
+      var key = cohort ? 'active_web:'+cohort : 'active_web';
+
+      window.dau_model = new libs.models.set({key:key, format:utils.union_smembers_format});
+      window.wau_model = new libs.models.set({key:key, format:utils.union_smembers_format});
+      window.mau_model = new libs.models.set({key:key, format:utils.union_smembers_format});
 
       alive.views['dau'] = new libs.views.numerical({ model:dau_model, title: ['Daily Active Users']});
       alive.views['wau'] = new libs.views.numerical({ model:wau_model, title: ['Weekly Active Users']});

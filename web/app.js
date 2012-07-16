@@ -33,6 +33,7 @@ app.get('/', routes.index);
 app.get('/login', routes.index);
 app.get('/actives', routes.index);
 app.get('/cohorts/:cohort', routes.index);
+app.get('/cohorts/:cohort/actives', routes.index);
 app.get('/dashboard', routes.index);
 app.get('/navigator', routes.index);
 
