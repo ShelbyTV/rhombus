@@ -73,7 +73,7 @@
       this._init_cohort_wau('reece_ux_1');
       this._init_cohort_wau('dan_ux_1');
       this._init_cohort_wau('henry_ux_1');
-      this._init_cohort_wau('myles_ux_1');
+      this._init_cohort_wau('myles');
       this._init_cohort_wau('chris_ux_1');
       this._init_cohort_wau('mark_ux_1');
       this._init_cohort_wau('lauren_ux_1');
