@@ -36,7 +36,8 @@
     //data = condense(data, floor_midnight);
 
     Object.keys(data).forEach(function(ts){
-      out.push([shift(ts/1), ms_to_mins(get_map_numerical_avg(data[ts]))]);
+      //out.push([shift(ts/1), ms_to_mins(get_map_numerical_avg(data[ts]))]);
+      out.push([ts/1, ms_to_mins(get_map_numerical_avg(data[ts]))]);
     });
 
     return out;

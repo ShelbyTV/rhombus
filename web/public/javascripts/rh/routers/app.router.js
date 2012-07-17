@@ -134,7 +134,7 @@
 
       // session length (hash -> avg)
       window.session_length_model = new libs.models.hash({key:'session_length', format:utils.session_length_format});
-      alive.views['session_length'] = new libs.views.bar({models:[session_length_model], title:'Avg. Session Length (in seconds)'});
+      alive.views['session_length'] = new libs.views.bar({models:[session_length_model], title:'Avg. Session Length (in minutes)'});
       window.session_length_model.hgetall();
 
       this._position_views();
