@@ -18,6 +18,7 @@
       var key = this.get('key')+cohort;
       utils.client._request(opts.cmd, {
         skip : opts.skip || 0,
+        //limit : opts.limit || 336,
         limit : opts.limit || 168,
         args : [key]
       }, function(res){
