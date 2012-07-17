@@ -33,7 +33,7 @@
     init : function(cohort, active_tab){
       if(this.auth()) {
         var self = this;
-        if (!window.app_model){ //bind stuff
+        if (!window.app_model){
           this._init_app_model();
           window.app_model.set({cohort:cohort||'all', active_tab:active_tab||'dashboard'});
         }
@@ -80,9 +80,12 @@
     _init_cohort_wau : function(cohort){
       var key = 'active_web';
 
+      var daily = new Date().getUTCHours(); //hrs today
+      var weekly = daily+(24*6); //daily + 6 days
+
       window.wau_model = new libs.models.set({key:key, cohort:cohort, format:utils.union_smembers_format});
       alive.views[cohort+'_wau'] = new libs.views.numerical({ model:wau_model, title: [cohort]});
-      window.wau_model.smembers({limit:24*7});
+      window.wau_model.smembers({limit:weekly});
     },
 
     init_actives : function(cohort){
@@ -100,10 +103,14 @@
       alive.views['dau'] = new libs.views.numerical({ model:dau_model, title: ['Daily']});
       alive.views['wau'] = new libs.views.numerical({ model:wau_model, title: ['Weekly']});
       alive.views['mau'] = new libs.views.numerical({ model:mau_model, title: ['Monthly']});
+      
+      var daily = new Date().getUTCHours(); //hrs today
+      var weekly = daily+(24*6); //daily + 6 days
+      var monthly = weekly+(24*7*3);//this week + 3 weeks
 
-      window.dau_model.smembers({limit:24});
-      window.wau_model.smembers({limit:24*7});
-      window.mau_model.smembers({limit:24*7*4});
+      window.dau_model.smembers({limit:daily});
+      window.wau_model.smembers({limit:weekly});
+      window.mau_model.smembers({limit:monthly});
     },
 
     init_dashboard : function(cohort){
@@ -129,27 +136,27 @@
       this._clear();
       this.init_navbar({active_tab:'actions', cohort:cohort});
 
-      // videos watched (set scard)
+      // videos watched (set smembers)
       window.videos_watched_model = new libs.models.set({key:'videos_watched', format:utils.memcard_format});
       alive.views['videos_watched'] = new libs.views.bar({models:[videos_watched_model], title:'Videos Watched'});
       window.videos_watched_model.smembers();
 
-      // videos rolled (set -> scard)
+      // videos rolled (set -> smembers)
       window.frames_rolled_model = new libs.models.set({key:'frames_rolled', format:utils.memcard_format});
       alive.views['frames_rolled'] = new libs.views.bar({models:[frames_rolled_model], title:'Videos Rolled'});
       window.frames_rolled_model.smembers();
 
-      // videos upvoted (set -> scard)
+      // videos upvoted (set -> smembers)
       window.frames_upvoted_model = new libs.models.set({key:'frames_upvoted', format:utils.memcard_format});
       alive.views['frames_upvoted'] = new libs.views.bar({models:[frames_upvoted_model], title:'Videos Upvoted'});
       window.frames_upvoted_model.smembers();
 
-      // videos commented on (set -> scard)
+      // videos commented on (set -> smembers)
       window.frames_commented_model = new libs.models.set({key:'comments', format:utils.memcard_format});
       alive.views['frames_commented'] = new libs.views.bar({models:[frames_commented_model], title:'Videos Commented On'});
       window.frames_commented_model.smembers();
 
-      // videos shared (set -> scard)
+      // videos shared (set -> smembers)
       window.frames_shared_model = new libs.models.set({key:'shares', format:utils.memcard_format});
       alive.views['frames_shared'] = new libs.views.bar({models:[frames_shared_model], title:'Videos Shared'});
       window.frames_shared_model.smembers();

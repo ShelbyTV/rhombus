@@ -7,18 +7,17 @@
     var map = {};
     var out = [];
 
-    //console.log('data', data);
-
+    // create {tsday : array}
     Object.keys(data).forEach(function(tshr){
       var tsday = floor_day(tshr);
       map[tsday] = map.hasOwnProperty(tsday) ? _.union(map[tsday], data[tshr]) : data[tshr];
     });
 
-    //console.log('map', map);
 
     Object.keys(map).forEach(function(ts){
-      out.push([ts/1, _.compact(map[ts]).length]); 
+      out.push([ts/1, map[ts].length]); 
     });
+
 
     return out;
   }
