@@ -5,10 +5,12 @@
 
   function condense(data, reduce_key){
     var condensed = {};
+
     Object.keys(data).forEach(function(key){
       var _key = reduce_key(key);
       condensed[_key] = condensed.hasOwnProperty(_key) ? condensed[_key]+data[key] : data[key];
     });
+
     return condensed;
   }
 

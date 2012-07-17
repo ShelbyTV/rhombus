@@ -14,7 +14,6 @@
     },
 
     _clear : function(){
-      console.log('clearing', Object.keys(alive.views));
       Object.keys(alive.views).forEach(function(key){
         alive.views[key].remove();
         delete alive.views[key];
@@ -37,11 +36,6 @@
         if (!window.app_model){ //bind stuff
           console.log('no app model, initting');
           this._init_app_model();
-          /*window.app_model = new libs.models.app();
-          window.app_model.bind('change', function(app){
-            console.log('change', app);
-            self.navigate('cohorts/'+app.get('cohort')+'/'+app.get('active_tab'), {trigger:true}); 
-          });*/
           console.log('setting w', cohort, active_tab);
           window.app_model.set({cohort:cohort||'all', active_tab:active_tab||'dashboard'});
         }
@@ -55,7 +49,6 @@
       var self = this;
       window.app_model = new libs.models.app();
       window.app_model.bind('change', function(app){
-        console.log('change', app);
         self.navigate('cohorts/'+app.get('cohort')+'/'+app.get('active_tab'), {trigger:true}); 
       });
     },
@@ -128,7 +121,7 @@
       this.init_navbar({active_tab:'dashboard', cohort:cohort});
 
       // active users (set -> scard)
-      window.active_web_model = new libs.models.set({key:'active_web', format:utils.active_web_format});
+      window.active_web_model = new libs.models.set({key:'active_web', format:utils.memcard_format});
       alive.views['active_web'] = new libs.views.bar({models:[active_web_model], title:'Active Users'});
       window.active_web_model.scard();
 
@@ -148,27 +141,27 @@
       this.init_navbar({active_tab:'actions', cohort:cohort});
 
       // videos watched (set scard)
-      window.videos_watched_model = new libs.models.set({key:'videos_watched', format:utils.active_web_format});
+      window.videos_watched_model = new libs.models.set({key:'videos_watched', format:utils.memcard_format});
       alive.views['videos_watched'] = new libs.views.bar({models:[videos_watched_model], title:'Videos Watched'});
       window.videos_watched_model.scard();
 
       // videos rolled (set -> scard)
-      window.frames_rolled_model = new libs.models.set({key:'frames_rolled', format:utils.active_web_format});
+      window.frames_rolled_model = new libs.models.set({key:'frames_rolled', format:utils.memcard_format});
       alive.views['frames_rolled'] = new libs.views.bar({models:[frames_rolled_model], title:'Videos Rolled'});
       window.frames_rolled_model.scard();
 
       // videos upvoted (set -> scard)
-      window.frames_upvoted_model = new libs.models.set({key:'frames_upvoted', format:utils.active_web_format});
+      window.frames_upvoted_model = new libs.models.set({key:'frames_upvoted', format:utils.memcard_format});
       alive.views['frames_upvoted'] = new libs.views.bar({models:[frames_upvoted_model], title:'Videos Upvoted'});
       window.frames_upvoted_model.scard();
 
       // videos commented on (set -> scard)
-      window.frames_commented_model = new libs.models.set({key:'comments', format:utils.active_web_format});
+      window.frames_commented_model = new libs.models.set({key:'comments', format:utils.memcard_format});
       alive.views['frames_commented'] = new libs.views.bar({models:[frames_commented_model], title:'Videos Commented On'});
       window.frames_commented_model.scard();
 
       // videos shared (set -> scard)
-      window.frames_shared_model = new libs.models.set({key:'shares', format:utils.active_web_format});
+      window.frames_shared_model = new libs.models.set({key:'shares', format:utils.memcard_format});
       alive.views['frames_shared'] = new libs.views.bar({models:[frames_shared_model], title:'Videos Shared'});
       window.frames_shared_model.scard();
 
