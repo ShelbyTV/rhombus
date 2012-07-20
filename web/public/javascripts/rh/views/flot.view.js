@@ -5,6 +5,7 @@
     className : 'flot-view-container',
 
     events : {
+      'change .time-selector' : '_on_time_selector_change'
     },
 
     template : function(){
@@ -17,8 +18,10 @@
       var loaded = 0;
       this.options.models.forEach(function(model){
         model.bind('change:data', function(){
+          console.log('data');
           loaded+=1;
           if (loaded===self.options.models.length){
+            loaded=0;
             self.render();
           }
         });
@@ -28,8 +31,6 @@
     render : function(){
       this.$el.html($(_.template(this.template(), {title : this._get_title()})));
       $('body').append(this.$el);
-      //var css = JSON.parse(localStorage._rhombus_state)[this.options.models[0].get('key')];
-      //this.$el.css(css);
       this.plot();
       var self = this;
       this.$el.draggable({
@@ -46,7 +47,6 @@
           self._render_title(self._get_title(true));
         }
       });
-      /*this._initResizePolling();*/
     },
 
     plot : function(){
@@ -55,7 +55,7 @@
     },
 
     _render_title : function(title){
-      this.$('.flot-view-header').html(title);
+      this.$('.flot-view-title').html(title);
     },
 
     _get_title : function(force_compute){
@@ -73,6 +73,23 @@
       });
       return series;
     },
+
+    _mappy_thing : {
+      '1 week' : 7*24,
+      '2 weeks' : 2*7*24,
+      '1 month' : 4*7*24
+    },
+
+    _on_time_selector_change : function(event){
+      var period = $(event.srcElement).val();
+      console.log('change', period);
+      var hrs = this._mappy_thing[period];
+      console.log('hrs', hrs);
+      this.options.models.forEach(function(model){
+        console.log(model);
+        model.smembers({limit:hrs});
+      });
+    }
 
   });
 
