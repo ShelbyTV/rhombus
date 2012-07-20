@@ -46,8 +46,10 @@
     _init_app_model : function(){
       var self = this;
       window.app_model = new libs.models.app();
-      window.app_model.bind('change', function(app){
-        self.navigate('cohorts/'+app.get('cohort')+'/'+app.get('active_tab'), {trigger:true}); 
+      window.app_model.bind('change', function(app, state){
+        if (state.changes.active_tab || state.changes.cohort){
+          self.navigate('cohorts/'+app.get('cohort')+'/'+app.get('active_tab'), {trigger:true}); 
+        }
       });
     },
 
@@ -121,11 +123,12 @@
       // active users (set -> scard)
       window.active_web_model = new libs.models.set({key:'active_web', format:utils.memcard_format});
       alive.views['active_web'] = new libs.views.bar({models:[active_web_model], title:'Active Users'});
-      window.active_web_model.smembers();
 
       // session length (hash -> avg)
       window.session_length_model = new libs.models.hash({key:'session_length', format:utils.session_length_format});
       alive.views['session_length'] = new libs.views.bar({models:[session_length_model], title:'Avg. Session Length (in minutes)'});
+
+      window.active_web_model.smembers();
       window.session_length_model.hgetall();
 
       this._position_views();
@@ -175,9 +178,29 @@
       window.total_real_users_model._get();
 
       // total users (int)
-      window.total_users_model = new libs.models.int({key:'total_users', format:utils.total_users_format});
-      alive.views['total_users'] = new libs.views.line({models:[total_users_model], title:'Total "Data" Users'});
+      window.total_users_model = new libs.models.int({key:'total_faux_users', format:utils.total_users_format});
+      alive.views['total_users'] = new libs.views.line({models:[total_users_model], title:'Faux Users'});
       window.total_users_model._get();
+
+      // total videos (int)
+      window.total_videos_model = new libs.models.int({key:'total_videos', format:utils.total_users_format});
+      alive.views['total_videos'] = new libs.views.line({models:[total_videos_model], title:'Videos'});
+      window.total_videos_model._get();
+
+      // total frames (int)
+      window.total_frames_model = new libs.models.int({key:'total_frames', format:utils.total_users_format});
+      alive.views['total_frames'] = new libs.views.line({models:[total_frames_model], title:'Frames'});
+      window.total_frames_model._get();
+
+      // total rolls (int)
+      window.total_rolls_model = new libs.models.int({key:'total_rolls', format:utils.total_users_format});
+      alive.views['total_rolls'] = new libs.views.line({models:[total_rolls_model], title:'Rolls'});
+      window.total_rolls_model._get();
+
+      // total conversationss (int)
+      window.total_conversations_model = new libs.models.int({key:'total_conversations', format:utils.total_users_format});
+      alive.views['total_conversations'] = new libs.views.line({models:[total_conversations_model], title:'Conversations'});
+      window.total_conversations_model._get();
 
       this._position_views();
     },

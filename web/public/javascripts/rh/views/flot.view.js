@@ -5,7 +5,6 @@
     className : 'flot-view-container',
 
     events : {
-      "mouseup" : "_onMouseUp"
     },
 
     template : function(){
@@ -32,37 +31,22 @@
       //var css = JSON.parse(localStorage._rhombus_state)[this.options.models[0].get('key')];
       //this.$el.css(css);
       this.plot();
-      /*this.$el.draggable();
-      this._initResizePolling();*/
-    },
-
-    _onMouseUp : function(){
-      if (this.should_resize){
-        this.plot();
-        this.should_resize = false;
-      }
-    },
-
-    _initResizePolling : function(){
       var self = this;
-      var state = {};
-      setInterval(function(){
-
-        if (!Object.keys(state).length){
-          state.width = self.$el.width();
-          state.height = self.$el.height();
-          return;
+      this.$el.draggable({
+        start : function(){
+          window.app_model.set('last_dragged_view', self);
         }
-
-        if (state.width!==self.$el.width() || state.height!==self.$el.height()){
-          //self.$el.css({width:100,height:100});
-          self.should_resize = true;
+      });
+      this.$el.droppable({
+        hoverClass : 'flot-drop-hover',
+        drop : function(){
+          self.options.models = _.union(window.app_model.get('last_dragged_view').options.models, self.options.models);
+          window.app_model.get('last_dragged_view').remove();
+          self.plot();
+          self._render_title(self._get_title(true));
         }
-
-        state.width = self.$el.width();
-        state.height = self.$el.height();
-
-      }, 10);
+      });
+      /*this._initResizePolling();*/
     },
 
     plot : function(){
@@ -70,12 +54,16 @@
       $.plot(this.$('.flot-view'), this._get_dataseries(), this.flot_options);
     },
 
-    _get_title : function(){
+    _render_title : function(title){
+      this.$('.flot-view-header').html(title);
+    },
+
+    _get_title : function(force_compute){
       var keys = [];
       this.options.models.forEach(function(model){
         keys.push(model.get('key'));
       });
-      return this.options.title || keys.join(' ');
+      return force_compute ? keys.join(' v ') : this.options.title;
     },
 
     _get_dataseries : function(){

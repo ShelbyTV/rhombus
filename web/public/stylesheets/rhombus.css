@@ -1,17 +1,14 @@
 body{ 
   font-family: 'Electrolize', sans-serif;
   background-color:#202020;
-  /*background-color:black;*/
   margin:50px 0px; padding:0px;
   text-align:center;
 }
 
 .flot-view-container{
-  /*cursor:pointer;*/
+  cursor:pointer;
   position:absolute;
   margin:20px;
-  /*float:left;*/
-  /*resize:both;*/
   overflow:hidden;
   height:300px;
   width:600px;
@@ -31,6 +28,10 @@ body{
   font-family:'Arial';
   height:87%;
   width:97%;
+}
+
+.flot-drop-hover{
+  opacity:0.4;
 }
 
 .login-view-container{
