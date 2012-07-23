@@ -1,9 +1,9 @@
 <div class="flot-view-header">
   <span class="flot-view-title">{{title}}</span>
   <select class="time-selector">
-    <option selected class="">1 week</option>
-    <option class="">2 weeks</option>
-    <option class="">1 month</option>
+    <option {{period=='1 week'?'selected':''}} class="">1 week</option>
+    <option {{period=='2 weeks'?'selected':''}} class="">2 weeks</option>
+    <option {{period=='1 month'?'selected':''}} class="">1 month</option>
   </select>
 </div>
 <div class="flot-view"> </div>

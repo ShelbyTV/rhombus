@@ -14,6 +14,23 @@
     },
 
     initialize : function(){
+      this._bind_model_changes();
+    },
+
+    render : function(){
+      this.$el.html($(_.template(this.template(), {title : this._get_title(), period : this._get_period()})));
+      $('body').append(this.$el);
+      this.plot();
+      this._make_draggable();
+      this._make_droppable();
+    },
+
+    plot : function(){
+      this.$('.flot-view').html('');
+      $.plot(this.$('.flot-view'), this._get_dataseries(), this.flot_options);
+    },
+
+    _bind_model_changes : function(){
       var self = this;
       var loaded = 0;
       this.options.models.forEach(function(model){
@@ -27,16 +44,8 @@
       });
     },
 
-    render : function(){
-      this.$el.html($(_.template(this.template(), {title : this._get_title()})));
-      $('body').append(this.$el);
-      this.plot();
+    _make_droppable : function(){
       var self = this;
-      this.$el.draggable({
-        start : function(){
-          window.app_model.set('last_dragged_view', self);
-        }
-      });
       this.$el.droppable({
         hoverClass : 'flot-drop-hover',
         drop : function(){
@@ -48,13 +57,21 @@
       });
     },
 
-    plot : function(){
-      this.$('.flot-view').html('');
-      $.plot(this.$('.flot-view'), this._get_dataseries(), this.flot_options);
+    _make_draggable : function(){
+      var self = this;
+      this.$el.draggable({
+        start : function(){
+          window.app_model.set('last_dragged_view', self);
+        }
+      });
     },
 
     _render_title : function(title){
       this.$('.flot-view-title').html(title);
+    },
+
+    _get_period : function(){
+      return this.options.models[0].get('period') || '1 week';
     },
 
     _get_title : function(force_compute){
@@ -73,7 +90,7 @@
       return series;
     },
 
-    _mappy_thing : {
+    _weeks_to_hrs : {
       '1 week' : 7*24,
       '2 weeks' : 2*7*24,
       '1 month' : 4*7*24
@@ -81,13 +98,9 @@
 
     _on_time_selector_change : function(event){
       var period = $(event.srcElement).val();
-      console.log('change', period);
-      var hrs = this._mappy_thing[period];
-      console.log('hrs', hrs);
+      var hrs = this._weeks_to_hrs[period];
       this.options.models.forEach(function(model){
-        //console.log(model);
-        //model.smembers({limit:hrs});
-        //console.log(model.get('last_load'));
+        model.set('period', period);
         model.load({cmd:model.get('last_load'), limit:hrs});
       });
     }

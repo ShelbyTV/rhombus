@@ -2,6 +2,10 @@
   window.libs.models.base = Backbone.Model.extend({
 
     initialize : function(){
+      this._apply_commands() ;
+    },
+
+    _apply_commands : function(){
       var self = this;
       this.get('commands').forEach(function(cmd){
         self[cmd] = function(opts){
@@ -18,7 +22,6 @@
       var key = this.get('key')+cohort;
       utils.client._request(opts.cmd, {
         skip : opts.skip || 0,
-        //limit : opts.limit || 336,
         limit : opts.limit || 168,
         args : [key]
       }, function(res){
