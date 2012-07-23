@@ -6,7 +6,7 @@
       this.get('commands').forEach(function(cmd){
         self[cmd] = function(opts){
           opts = opts || {};
-          opts.cmd = cmd.replace('_','');
+          opts.cmd = cmd.replace('_',''); //this allows for _get
           self.load(opts);
         }
       });
@@ -24,6 +24,7 @@
       }, function(res){
         res = JSON.parse(res)
         if (res.error || !res.data) return console.log(res.error);
+        self.set('last_load', opts.cmd);
         self.set({data:self.get('format')(res.data)});
       });
     }

@@ -18,7 +18,6 @@
       var loaded = 0;
       this.options.models.forEach(function(model){
         model.bind('change:data', function(){
-          console.log('data');
           loaded+=1;
           if (loaded===self.options.models.length){
             loaded=0;
@@ -86,8 +85,10 @@
       var hrs = this._mappy_thing[period];
       console.log('hrs', hrs);
       this.options.models.forEach(function(model){
-        console.log(model);
-        model.smembers({limit:hrs});
+        //console.log(model);
+        //model.smembers({limit:hrs});
+        //console.log(model.get('last_load'));
+        model.load({cmd:model.get('last_load'), limit:hrs});
       });
     }
 
