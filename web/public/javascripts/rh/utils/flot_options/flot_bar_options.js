@@ -10,7 +10,7 @@
 
     xaxis: {
       ticks:8,
-      color:'white',
+      /*color:'white',*/
       mode : 'time'
     },
 
@@ -20,10 +20,14 @@
     },
 
     yaxis: {
-      color:'white'
+      /*color:'white'*/
     },
 
-    colors : ['white']
+    grid:{
+      borderColor:'white'
+    }
+
+    /*colors : ['white']*/
 
   };
 })();

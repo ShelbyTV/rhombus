@@ -1,6 +1,6 @@
 body{ 
-  font-family: 'Electrolize', sans-serif;
-  background-color:#202020;
+  /*font-family: 'Electrolize', sans-serif;*/
+  font-family:helvetica, arial, sans-serif;
   margin:50px 0px; padding:0px;
   text-align:center;
   overflow-x:hidden;
@@ -18,10 +18,9 @@ body{
 .flot-view-header{
   font-size:95%;
   border-radius:5px;
-  font-style:bold;
-  color:white;
+  font-weight:200;
   width:100%;
-  background-color:#272727;
+  background-color:#F0EFE6;
   padding:5px;
 }
 
@@ -38,7 +37,6 @@ body{
 .login-view-container{
   width:300px;
   margin:0px auto;
-  color:white;
 }
 
 .login-logo{
@@ -49,9 +47,6 @@ body{
   width:100%;
   font-size:120%;
   margin:5px;
-  background-color:black;
-  color:white;
-  border:2px solid black;
 }
 
 button.login-button{
@@ -61,7 +56,6 @@ button.login-button{
   border-radius:5px;
   margin:5px;
   padding:5px;
-  background-color:#8BAB8D;
 }
 
 .login-wait-msg{
@@ -84,11 +78,12 @@ button.login-button{
 
 .navbar-view-container{
   padding:5px;
-  color:white;
   position:absolute;
+  background-color:#F0EFE6;
   top : 0px;
   width:100%;
-  border-bottom:1px solid #707070;
+  font-weight:400;
+  border-bottom:1px solid #999999;
 }
 
 .navbar-item{
@@ -96,20 +91,21 @@ button.login-button{
   margin:5px;
   float:left;
   font-size:105%;
-  color:#909090;
+  font-weight:200;
+  color:#808080;
 }
 
 .navbar-item-cohort{
   cursor:none;
-  color:white;
 }
 
 .navbar-active{
-  color:white;
+  /*color:#505050;*/
+  color:black;
 }
 
 .navbar-item:hover{
-  color:white;
+  color:black;
 }
 
 .time-selector{
